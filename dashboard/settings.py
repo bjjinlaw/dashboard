@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-from decouple import config
 # settings.py
 from dotenv import load_dotenv
 load_dotenv()
@@ -30,7 +29,7 @@ SECRET_KEY = 'django-insecure-kk_a#ke#t9x^yrp(z-%=*t9xmc_53e)t_i*8##cm!+uryk0y%9
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app', '.now.sh']
+ALLOWED_HOSTS = ['.vercel.app', '.now.sh', '127.0.0.1']
 # Or * to allow all
 # ALLOWED_HOSTS = ['*']
 
@@ -95,8 +94,6 @@ DATABASES = {
     }
 }
 
-SUPABASE_URL = config('SUPABASE_URL')
-SUPABASE_KEY = config('SUPABASE_KEY')
 
 
 # Password validation
