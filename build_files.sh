@@ -12,11 +12,5 @@ python3.9 manage.py collectstatic --noinput --clear
 
 # createsuperuser
 python3.9 manage.py createsuperuser
-demo
-
-demo
-demo
-
-
-
-y
+--username demo
+--password demo
