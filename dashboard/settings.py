@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'dashapp',
     'rest_framework',
     'drf_yasg',
 ]
@@ -89,7 +88,7 @@ DATABASES = {
     }
 }
 
-DATABASES['default'] = dj_database_url.config()
+# DATABASES['default'] = dj_database_url.config()
 
 
 # Password validation
