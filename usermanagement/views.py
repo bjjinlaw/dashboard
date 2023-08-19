@@ -8,9 +8,6 @@ from rest_framework.permissions import IsAdminUser
 
 
 
-
-
-
 class UserRegisterView(APIView):
     serializer=UserRegisterSerializer
     permission_classes=[IsAdminUser]
@@ -38,17 +35,12 @@ class UserRegisterView(APIView):
 
 class UserDetailUpdateDeleteView(APIView):
     serializer=UserDetailUpdataSerializer
-    
-    
-    
-    
+
     def get_object(self):
         user=User.objects.filter(pk=self.kwargs.get("pk")).first()
         return user
     
-    
-    
-    
+
     def put(self,request,*args,**kwargs):   
         user=self.get_object()
         if not user:
