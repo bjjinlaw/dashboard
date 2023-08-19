@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'drf_yasg',
+    'usermanagement',
 ]
 
 MIDDLEWARE = [
@@ -81,10 +82,20 @@ WSGI_APPLICATION = 'dashboard.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": "mydatabase",
+#     }
+# }
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": "mydatabase",
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": "dashbase",
+        "USER": "dashuser",
+        "PASSWORD": "dashpass",
+        "HOST": "127.0.0.1",
+        "PORT": "5432",
     }
 }
 
@@ -134,6 +145,10 @@ STATIC_ROOT = BASE_DIR / "staticfiles_build" / "static"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+AUTH_USER_MODEL="usermanagement.User"
 
 
 
