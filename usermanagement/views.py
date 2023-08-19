@@ -109,6 +109,7 @@ class CreateSuperUser(APIView):
         email=request.data.get("email")
         password=request.data.get("password")
         User.objects.create_superuser(email=email,password=password)
+        
         return Response("Success")
         
         
