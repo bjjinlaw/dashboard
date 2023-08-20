@@ -3,8 +3,6 @@ from rest_framework import serializers
 
 
 
-
-
 class UserRegisterSerializer(serializers.Serializer):
     username=serializers.CharField(max_length=25)
     address=serializers.CharField(max_length=100)
@@ -20,9 +18,6 @@ class UserRegisterSerializer(serializers.Serializer):
     first_name=serializers.CharField(max_length=25)
     middle_name=serializers.CharField(max_length=25,required=False)
     last_name=serializers.CharField(max_length=25)
-    
-
-    
     
     
     def validate(self, attrs):

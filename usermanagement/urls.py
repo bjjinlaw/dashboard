@@ -1,5 +1,5 @@
 from django.urls import path
-from usermanagement.views import (UserRegisterView,UserDetailUpdateDeleteView,CreateSuperUser)
+from usermanagement.views import (UserRegisterView,UserDetailUpdateDeleteView)
 
 
 app_name="user"

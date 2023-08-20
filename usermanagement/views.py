@@ -92,7 +92,6 @@ class UserDetailUpdateDeleteView(APIView):
         return Response(context)
         
         
-        
 
 
 
