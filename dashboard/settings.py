@@ -103,7 +103,7 @@ DATABASES = {
 
 # # Check if the environment variable is set for online deployment
 # if "ONLINE_DEPLOYMENT" in os.environ:
-#     # Use dj_database_url to configure the database from the environment variable
+# Use dj_database_url to configure the database from the environment variable
 
 DATABASES['default'] = dj_database_url.config()
 
