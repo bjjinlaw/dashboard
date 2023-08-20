@@ -101,21 +101,6 @@ DATABASES = {
     }
 }
 
-import os
-import dj_database_url
-
-# Define the default database configuration
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "dashbase",
-        "USER": "dashuser",
-        "PASSWORD": "dashpass",
-        "HOST": "localhost",
-        "PORT": "5432",
-    }
-}
-
 # Check if the environment variable is set for online deployment
 if "ONLINE_DEPLOYMENT" in os.environ:
     # Use dj_database_url to configure the database from the environment variable
