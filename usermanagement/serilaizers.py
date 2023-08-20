@@ -47,6 +47,10 @@ class UserRegisterSerializer(serializers.Serializer):
         if active_user:
             raise serializers.ValidationError("User With Such Credential Already Exits !!")
         return value
+    
+    
+    
+        
         
     
     

@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'usermanagement',
-    'rest_framework_simplejwt'
+    'rest_framework_simplejwt',
+    'faculty',
+    'userprofile',
 ]
 
 MIDDLEWARE = [
