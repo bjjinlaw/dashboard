@@ -1,5 +1,8 @@
 from usermanagement.models import User
 from rest_framework import serializers
+from userprofile.models import StudentProfile,TeacherProfile
+
+
 
 
 
@@ -19,14 +22,15 @@ class UserRegisterSerializer(serializers.Serializer):
     middle_name=serializers.CharField(max_length=25,required=False)
     last_name=serializers.CharField(max_length=25)
     
+
+    
+    
     
     def validate(self, attrs):
         password1=attrs["password1"]
         password2=attrs["password2"]
-        
         if password1!=password2:
             raise serializers.ValidationError("Both Password Doesn't Match")
-        
         return attrs
     
     
@@ -42,9 +46,12 @@ class UserRegisterSerializer(serializers.Serializer):
         if active_user:
             raise serializers.ValidationError("User With Such Credential Already Exits !!")
         return value
-        
     
     
+    def validate_user_type(self,value):
+        if int(value)>3 and int(value)<1:
+            raise serializers.ValidationError(" UserType Mismatched ")
+        return value
     
     
     def create(self, validated_data): 
@@ -61,8 +68,12 @@ class UserRegisterSerializer(serializers.Serializer):
         first_name=validated_data.get("first_name") 
         middle_name=validated_data.get("middle_name") 
         last_name=validated_data.get("last_name") 
-        return User.objects.create_user(email=email,user_type=user_type,dob=dob,blood_group=blood_group,marital_status=marital_status, gender=gender,first_name=first_name,middle_name=middle_name,last_name=last_name,password=password,address=address,phone_number=phone_number,username=username)
-        
+        user=User.objects.create_user(email=email,user_type=user_type,dob=dob,blood_group=blood_group,marital_status=marital_status, gender=gender,first_name=first_name,middle_name=middle_name,last_name=last_name,password=password,address=address,phone_number=phone_number,username=username)
+        if int(user_type)==1:
+            StudentProfile.objects.create(user=user)
+        elif int(user_type)==2:
+            TeacherProfile.objects.create(user=user)
+        return user
         
         
 

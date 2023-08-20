@@ -11,16 +11,16 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-import os
-import dj_database_url
 from decouple import config
+# settings.py
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.2/howto/depl+-oyment/checklist/
+# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-kk_a#ke#t9x^yrp(z-%=*t9xmc_53e)t_i*8##cm!+uryk0y%9'
@@ -46,7 +46,9 @@ INSTALLED_APPS = [
     'rest_framework',
     'drf_yasg',
     'usermanagement',
-    'rest_framework_simplejwt'
+    'rest_framework_simplejwt',
+    'faculty',
+    'userprofile',
 ]
 
 MIDDLEWARE = [
@@ -90,30 +92,21 @@ DATABASES = {
     }
 }
 
+
 # DATABASES = {
 #     "default": {
 #         "ENGINE": "django.db.backends.postgresql",
 #         "NAME": "dashbase",
 #         "USER": "dashuser",
 #         "PASSWORD": "dashpass",
-#         "HOST": "localhost",
+#         "HOST": "127.0.0.1",
 #         "PORT": "5432",
 #     }
 # }
 
 
-# # Check if the environment variable is set for online deployment
-# if "ONLINE_DEPLOYMENT" in os.environ:
-#     # Use dj_database_url to configure the database from the environment variable
-DATABASES['default'] = dj_database_url.config()
 
-# # You can also define separate settings for local development if needed
-# if not os.environ.get('ONLINE_DEPLOYMENT'):
-#     DATABASES['default']['NAME'] = 'dashbase'
-#     DATABASES['default']['USER'] = 'dashuser'
-#     DATABASES['default']['PASSWORD'] = 'dashpass'
-#     DATABASES['default']['HOST'] = 'localhost'
-#     DATABASES['default']['PORT'] = '5432'
+DATABASES['default'] = dj_database_url.config()
 
 
 # Password validation
@@ -176,3 +169,5 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated"
     ]
 }
+
+

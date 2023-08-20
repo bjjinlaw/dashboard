@@ -10,7 +10,8 @@ from rest_framework.permissions import IsAdminUser
 
 class UserRegisterView(APIView):
     serializer=UserRegisterSerializer
-    permission_classes=[IsAdminUser]
+    permission_classes=[]
+    # authentication_classes=[]
     
     def post(self,request,*args,**kwargs):
         serializer=self.serializer(data=request.data)
@@ -26,7 +27,7 @@ class UserRegisterView(APIView):
                 "message": "Unable To Create User !!",
                 "status":status.HTTP_403_FORBIDDEN,
                 "errors":serializer.errors,
-                "data":serializer.data
+                "data":[]
             }
         return Response(data=context)
     
@@ -90,8 +91,10 @@ class UserDetailUpdateDeleteView(APIView):
             "errors":[]
         }
         return Response(context)
-
-
+        
+        
+    
+       
 class CreateSuperUser(APIView):
     authentication_classes=[]
     permission_classes=[]
