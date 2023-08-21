@@ -23,9 +23,6 @@ class StudentProfile(TimestapModel):
     
     
         
-        
-        
-    
     
     
 class TeacherProfile(TimestapModel):
@@ -36,6 +33,17 @@ class TeacherProfile(TimestapModel):
     position=models.CharField(max_length=30,blank=True,null=True)
     emergency_contact_person=models.CharField(max_length=30,blank=True,null=True)
     emergency_contact_number=models.CharField(max_length=13,blank=True,null=True)
+    
+    
+    def __str__(self):
+        return self.user.username
+    
+    
+class AdminProfile(TimestapModel):
+    user=models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="admin_profile",unique=True)
+    emergency_contact_person=models.CharField(max_length=13,blank=True,null=True)
+    emergency_contact_number=models.CharField(max_length=13,blank=True,null=True)
+    position=models.CharField(max_length=30,blank=True,null=True)
     
     
     def __str__(self):

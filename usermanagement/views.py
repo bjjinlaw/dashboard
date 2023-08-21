@@ -92,19 +92,7 @@ class UserDetailUpdateDeleteView(APIView):
         }
         return Response(context)
         
-        
     
-       
-class CreateSuperUser(APIView):
-    authentication_classes=[]
-    permission_classes=[]
-    def post(self,request,*args,**kwargs):
-        email=request.data.get("email")
-        password=request.data.get("password")
-        User.objects.create_superuser(email=email,password=password)
-        
-        return Response("Success")
-        
         
 
 

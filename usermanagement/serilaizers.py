@@ -1,6 +1,6 @@
 from usermanagement.models import User
 from rest_framework import serializers
-from userprofile.models import StudentProfile,TeacherProfile
+from userprofile.models import StudentProfile,TeacherProfile,AdminProfile
 
 
 
@@ -25,7 +25,6 @@ class UserRegisterSerializer(serializers.Serializer):
 
     
     
-    
     def validate(self, attrs):
         password1=attrs["password1"]
         password2=attrs["password2"]
@@ -38,13 +37,13 @@ class UserRegisterSerializer(serializers.Serializer):
     def validate_email(self,value):
         active_user=User.objects.filter(email=value)
         if active_user:
-            raise serializers.ValidationError("User With Such Credential Already Exits !!")
+            raise serializers.ValidationError("User With Such Credential Already Exists !!")
         return value
         
     def validate_username(self,value):
         active_user=User.objects.filter(username=value)
         if active_user:
-            raise serializers.ValidationError("User With Such Credential Already Exits !!")
+            raise serializers.ValidationError("User With Such Credential Already Exists !!")
         return value
     
     
@@ -54,7 +53,7 @@ class UserRegisterSerializer(serializers.Serializer):
         return value
     
     
-    def create(self, validated_data): 
+    def create(self, validated_data):
         username=validated_data.get("username")
         password=validated_data.get("password1") 
         address=password=validated_data.get("password1") 
@@ -69,14 +68,29 @@ class UserRegisterSerializer(serializers.Serializer):
         middle_name=validated_data.get("middle_name") 
         last_name=validated_data.get("last_name") 
         user=User.objects.create_user(email=email,user_type=user_type,dob=dob,blood_group=blood_group,marital_status=marital_status, gender=gender,first_name=first_name,middle_name=middle_name,last_name=last_name,password=password,address=address,phone_number=phone_number,username=username)
+        
+        # checks if user has existing profile
+        
+        if int(user_type) == 1:
+            existing_profiles = StudentProfile.objects.filter(user=user)
+        elif int(user_type) == 2:
+            existing_profiles = TeacherProfile.objects.filter(user=user)
+        elif int(user_type) == 3:
+            existing_profiles = AdminProfile.objects.filter(user=user)
+        
+        if existing_profiles and existing_profiles.exists():
+            raise serializers.ValidationError("User already has a profile of the same type")
+        
+        # creates profile if validation passes
+        
         if int(user_type)==1:
             StudentProfile.objects.create(user=user)
         elif int(user_type)==2:
             TeacherProfile.objects.create(user=user)
+        elif int(user_type)==3:
+            AdminProfile.objects.create(user=user)
         return user
         
-        
-
         
         
 class UserDetailUpdataSerializer(serializers.ModelSerializer):
@@ -86,12 +100,13 @@ class UserDetailUpdataSerializer(serializers.ModelSerializer):
         model=User
         exclude=("last_login","is_superuser","is_staff","is_active","date_joined","groups","user_permissions")
         
-
-    
-    
-    
-
-    
-    
-    
-
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
